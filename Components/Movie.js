@@ -1,22 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity,Button } from 'react-native';
 import axios from 'axios';
-import { WebView } from 'react-native-webview';
+import { WebView} from 'react-native-webview';
+import Reviews from './Reviews';
+
+
 
 function MovieDetails({route}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  
+  const [id, setId] = useState({});
+  const [url, setUrl] = useState('');
 
+
+ 
   const { itemId } = route.params;
   
   const [trailerKey, setTrailerKey] = useState(null);
 
+  const [allowRedirect, setAllowRedirect] = useState(false);
+
+  const handleShouldStartLoadWithRequest = (event) => {
+    // Check if the request is a redirect
+    if (event.navigationType === 'click' && !allowRedirect) {
+      return false;
+    }
+    return true;
+  };
+  
+
+  
   useEffect(() => {
     async function fetchTrailer() {
       const apiKey = '152f41397d36a9af171b938124f0281c';
       const res = await axios.get(`https://api.themoviedb.org/3/movie/${itemId}/videos?api_key=${apiKey}`);
       const trailer = res.data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+      
       if (trailer) {
         setTrailerKey(trailer.key);
       }
@@ -31,10 +50,18 @@ function MovieDetails({route}) {
       const res = await axios.get(`https://api.themoviedb.org/3/movie/${itemId}?api_key=${apiKey}`);
       setIsLoading(false);
       setMovie(res.data);
+      setId(res.data.imdb_id)
       
     }
     fetchMovieDetails();
   }, [itemId]);
+ 
+  
+  
+ 
+  const handleUrlChange = (prop) => {
+    setUrl(prop);
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -56,19 +83,31 @@ function MovieDetails({route}) {
           </View>
           <View style={styles.description}>
             <Text style={styles.descriptionText}>{movie.overview}</Text>
-          </View>
+          </View> 
+          
+          <View style={styles.trailer}>
+      
+      
+           {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}          onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+
+          style={{ width: 420, height: 120 }}   allowsFullscreenVideo={true} key={url}
+          />} 
+          </View> 
+          <Button title="Load URL 1" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
+      <Button title="Load URL 2" onPress={() => handleUrlChange('https://2embed.org/embed/')} />
           <View style={styles.reviews}>
             <Text style={styles.reviewsTitle}>Reviews</Text>
             <TouchableOpacity style={styles.addReviewButton}>
               <Text style={styles.addReviewText}>Add Review</Text>
             </TouchableOpacity>
             <View style={styles.comments}>
-              <Text style={styles.commentText}>No comments yet</Text>
+        
             </View>
           </View>
         </>
       )}
     </ScrollView>
+  
   );
 }
 

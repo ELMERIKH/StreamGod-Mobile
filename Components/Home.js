@@ -14,12 +14,14 @@ function HomePage() {
   useEffect(() => {
     async function fetchPopularMovies(page) {
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=${page}`);
       setPopularMovies(res.data.results);
     }
 
     fetchPopularMovies(1);
   }, []);
+  
+  
 
   return (
     <View style={styles.container}>
@@ -33,6 +35,7 @@ function HomePage() {
         {popularMovies.map((movie) => (
           <View key={movie.id}>
                         <View style={styles.movieContainer}>
+                        <TouchableOpacity  onPress={() => navigation.navigate('MovieDetails', { itemId : movie.id })}>
 
             <Image
               source={{
@@ -41,7 +44,9 @@ function HomePage() {
               style={styles.poster}
             />
                          <Text style={styles.title}>{movie.title}</Text>
+                         </TouchableOpacity>
                          </View>
+
           </View>
         ))}
       </Swiper>
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 450,
     marginHorizontal: 55,
-    marginTop:175,
+    marginTop:120,
   },
   title: {
     marginTop: 10,
