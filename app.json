@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MovieApp",
-    "slug": "MovieApp",
+    "slug": "movieapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,17 +14,33 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "devices": [
+      "iPhone 12",
+      "iPhone 12 Pro"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.naiitex.Moncef"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.naiitex.MovieApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ad722713-59cd-43e6-9f08-87a69a0d8427"
+      }
+    },
+    "owner": "sohayb112"
   }
 }

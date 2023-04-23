@@ -14,7 +14,7 @@ function HomePage() {
   useEffect(() => {
     async function fetchPopularMovies(page) {
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=${page}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`);
       setPopularMovies(res.data.results);
     }
 

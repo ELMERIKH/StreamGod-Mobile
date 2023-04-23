@@ -27,13 +27,13 @@ function MovieList() {
       let results = [];
 
       for (let i = 1; i <= totalPages; i++) {
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${i}`);
+        const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=${i}`);
         const pageResults = res.data.results.slice(0, perPage);
         results = [...results, ...pageResults];
       }
 
 
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=${page}`);
       const resul = res.data.results.slice(0, perPage);
 
      

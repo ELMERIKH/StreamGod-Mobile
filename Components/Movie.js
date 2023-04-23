@@ -88,14 +88,15 @@ function MovieDetails({route}) {
           <View style={styles.trailer}>
       
       
-           {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}          onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+           {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}  allowsBackForwardNavigationGestures={false}       onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
 
           style={{ width: 420, height: 120 }}   allowsFullscreenVideo={true} key={url}
           />} 
           </View> 
-          <Button title="Load URL 1" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
-      <Button title="Load URL 2" onPress={() => handleUrlChange('https://2embed.org/embed/')} />
+    
           <View style={styles.reviews}>
+          <Button Style={styles.Button} title="Load URL 1" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
+      <Button Style={styles.Button} title="Load URL 2" onPress={() => handleUrlChange('https://2embed.org/embed/')} />
             <Text style={styles.reviewsTitle}>Reviews</Text>
             <TouchableOpacity style={styles.addReviewButton}>
               <Text style={styles.addReviewText}>Add Review</Text>
@@ -166,6 +167,10 @@ const styles = StyleSheet.create({
   reviewsTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  Button: {
+    height: 20,
+    marginHorizontal: 20,
   },
  
  

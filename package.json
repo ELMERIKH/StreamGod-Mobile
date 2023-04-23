@@ -30,7 +30,8 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-swiper": "^1.6.0",
     "react-native-web": "~0.18.10",
-    "react-native-webview": "11.26.0"
+    "react-native-webview": "11.26.0",
+    "expo-dev-client": "~2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
