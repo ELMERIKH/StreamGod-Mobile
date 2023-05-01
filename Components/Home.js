@@ -28,9 +28,10 @@ function HomePage() {
       <View style={styles.navbar}> 
       <ProfileDropdown />
       <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Movies')}>
-          <Text style={styles.navButtonText}>Movie List</Text>
+          <Text style={styles.navButtonText}>Movie Search</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.titleText}>FEATURED MOVIES</Text>
       <Swiper slidesPerView={3} spaceBetween={20}>
         {popularMovies.map((movie) => (
           <View key={movie.id}>
@@ -59,14 +60,14 @@ function HomePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: '#212A3E',
     alignItems: 'center',
     justifyContent: 'center',
   },
   navbar: {
     height: 50,
     width: '100%',
-    backgroundColor: 'black',
+    backgroundColor: '#394867',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -75,25 +76,32 @@ const styles = StyleSheet.create({
   navButton: {
     paddingHorizontal: 10,
     paddingVertical: 5,
-    backgroundColor: 'gold',
+    backgroundColor: '#A5C0DD',
     borderRadius: 5,
     
   },
   navButtonText: {
-    color: 'black',
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  titleText:{
+    color:'#FFFFFF',
+    marginTop: 10,
+    fontSize: 50,
     fontWeight: 'bold',
   },
   poster: {
     width: 300,
     height: 450,
-    marginHorizontal: 55,
-    marginTop:120,
+    marginTop:30,
   },
   title: {
     marginTop: 10,
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    color:'#FFFFFF'
+    
   },
   movieContainer: {
     alignItems: 'center',

@@ -87,23 +87,14 @@ function MovieDetails({route}) {
           
           <View style={styles.trailer}>
       
-      
-           {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}  allowsBackForwardNavigationGestures={false}       onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
+          {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}  allowsBackForwardNavigationGestures={false}       onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
 
-          style={{ width: 420, height: 120 }}   allowsFullscreenVideo={true} key={url}
+          style={{ width: 400, height: 120 }}   allowsFullscreenVideo={true} key={url}
           />} 
-          </View> 
-    
+          </View>  
+          
           <View style={styles.reviews}>
-          <Button Style={styles.Button} title="Load URL 1" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
-      <Button Style={styles.Button} title="Load URL 2" onPress={() => handleUrlChange('https://2embed.org/embed/')} />
-            <Text style={styles.reviewsTitle}>Reviews</Text>
-            <TouchableOpacity style={styles.addReviewButton}>
-              <Text style={styles.addReviewText}>Add Review</Text>
-            </TouchableOpacity>
-            <View style={styles.comments}>
-        
-            </View>
+          <Button Style={styles.Button} title="Watch Movie Here" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
           </View>
         </>
       )}
@@ -115,29 +106,32 @@ function MovieDetails({route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#212A3E',
   },
   header: {
     flexDirection: 'row',
-    marginHorizontal: 20,
+    marginLeft: 20,
     marginTop: 20,
   },
   poster: {
     width: 120,
     height: 180,
+    borderRadius: 10,
   },
   headerText: {
     flex: 1,
+    color:'#FFFFFF',
     marginLeft: 20,
     justifyContent: 'center',
   },
   title: {
+    color:'#FFFFFF',
     fontSize: 24,
     fontWeight: 'bold',
   },
   rating: {
     marginTop: 10,
-    backgroundColor: 'gold',
+    backgroundColor: '#F3E99F',
     alignSelf: 'flex-start',
     borderRadius: 4,
     paddingVertical: 4,
@@ -157,42 +151,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   descriptionText: {
-    fontSize: 18,
-    lineHeight: 24,
+    color:'#FFFFFF',
+    fontSize: 20,
+    lineHeight: 30,
   },
   reviews: {
     marginTop: 20,
-    marginHorizontal: 20,
+    paddingBottom:20,
   },
-  reviewsTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  Button: {
-    height: 20,
-    marginHorizontal: 20,
-  },
- 
- 
-    addReviewButton: {
-        backgroundColor: '#1E90FF',
-        borderRadius: 4,
-        marginTop: 20,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        alignSelf: 'flex-start',
-        },
-        addReviewText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 16,
-        },
-        comments: {
-        marginTop: 20,
-        },
-        commentText: {
-        fontSize: 16,
-        },
-        });
+  Button:{
+    backgroundColor:'green'
+  }
+});
         
       export default MovieDetails;

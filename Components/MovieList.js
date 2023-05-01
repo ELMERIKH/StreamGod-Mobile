@@ -72,14 +72,13 @@ const renderItem = ({ item, }) => {
 
   return (
     
-<TouchableOpacity style={{ flexDirection: 'row', marginVertical: 10 }} onPress={() => navigation.navigate('MovieDetails', { itemId : item.id })}>
-      <Image source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }} style={{ width: 80, height: 120 }} />
+<TouchableOpacity style={{ flexDirection: 'row', marginVertical: 10}} onPress={() => navigation.navigate('MovieDetails', { itemId : item.id })}>
+      <Image source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }} style={styles.image} />
       <View  style={{ marginLeft: 10 }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{item.title}</Text>
-        <Text style={{ fontSize: 16 }}>{item.release_date}</Text>
-        <Text style={{ fontSize: 16 }}>{item.vote_average}/10</Text>
+        <Text style={[styles.title, { fontSize: 18, fontWeight: 'bold' }]}>{item.title}</Text>
+        <Text style={[styles.title, { fontSize: 16 }]}>{item.release_date}</Text>
+        <Text style={[styles.title,{ fontSize: 16 }]}>{item.vote_average}⭐</Text>
       </View>
-      
     </TouchableOpacity>
   );
 
@@ -88,17 +87,17 @@ const renderItem = ({ item, }) => {
 
 
   return (
-    <View style={{ height: '100%', paddingBottom: 5 }}>
-            <TextInput style={styles.input } placeholder="Search movies" onChangeText={handleSearch} />
+    <View style={{ height: '100%'}}>
+            <TextInput style={[styles.input, { textAlign: 'center' }]} placeholder="Search movies ..." onChangeText={handleSearch} />
 
-      <FlatList
+      <FlatList style={styles.container}
         ref={flatListRef}
         data={filteredMovies.length > 0 ? filteredMovies : movies}
         contentContainerStyle={{ paddingBottom: 20 }}
 
         renderItem={renderItem}
         keyExtractor={keyExtractor}
-        ListFooterComponent={isLoading && <Text style={{ textAlign: 'center', marginVertical: 10 }}>Loading...</Text>}
+        ListFooterComponent={isLoading && <Text style={{ textAlign: 'center', marginVertical: 10, color:'#FFFFFF' }}>Loading Movies...</Text>}
       />
       
     </View>
@@ -109,19 +108,19 @@ const renderItem = ({ item, }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:'#212A3E'
   },
   image: {
-    width: 200,
-    height: 300,
+    width: 100,
+    height: 150,
     resizeMode: 'cover',
-    marginVertical: 10,
+    marginLeft:20,
+    borderRadius:20,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 5,
+    color:'white',
+    textTransform:'uppercase',
+    marginBottom:10,
   },
   input: {
     fontSize: 20,
