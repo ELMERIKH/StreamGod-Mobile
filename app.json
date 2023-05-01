@@ -16,7 +16,8 @@
     ],
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "devices": [
       "iPhone 12",
