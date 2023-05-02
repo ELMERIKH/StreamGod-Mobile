@@ -27,9 +27,6 @@ function HomePage() {
     <View style={styles.container}>
       <View style={styles.navbar}> 
       <ProfileDropdown />
-      <TouchableOpacity style={styles.navButton} onPress={() => navigation.navigate('Movies')}>
-          <Text style={styles.navButtonText}>Movie Search</Text>
-        </TouchableOpacity>
       </View>
       <Text style={styles.titleText}>FEATURED MOVIES</Text>
       <Swiper slidesPerView={3} spaceBetween={20}>
@@ -42,8 +39,7 @@ function HomePage() {
               source={{
                 uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
               }}
-              style={styles.poster}
-            />
+              style={styles.poster}/>
                          <Text style={styles.title}>{movie.title}</Text>
                          </TouchableOpacity>
                          </View>
@@ -86,14 +82,14 @@ const styles = StyleSheet.create({
   },
   titleText:{
     color:'#FFFFFF',
-    marginTop: 10,
+    marginTop: 7,
     fontSize: 50,
     fontWeight: 'bold',
   },
   poster: {
     width: 300,
     height: 450,
-    marginTop:30,
+    marginTop:10,
   },
   title: {
     marginTop: 10,

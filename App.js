@@ -11,6 +11,7 @@ import MovieList from './Components/MovieList';
 import MovieDetails from './Components/Movie';
 import HomePage from './Components/Home';
 import { registerRootComponent } from "expo";
+
   const Stack = createStackNavigator();
   function App() {
 
@@ -49,3 +50,24 @@ const styles = StyleSheet.create({
 
 
 // npx expo start --tunnel
+
+/*   
+      replace : const Stack = createStackNavigator();  --->  const Tab = createBottomTabNavigator();
+
+      replace : import { createStackNavigator } from '@react-navigation/stack';   --->   import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+      ga3 dakchi lli wst return, replace with code below
+      
+      |
+      |
+      V
+
+      <NavigationContainer>
+      <Tab.Navigator tabBarOptions={{ activeTintColor: 'red', inactiveTintColor: 'green', backgroundColor:'black'}}>
+      <Tab.Screen name="Home"   component={HomePage} />
+      <Tab.Screen name="Search" component={MovieList} />
+      </Tab.Navigator>
+      </NavigationContainer>
+
+
+*/
