@@ -9,21 +9,27 @@ import MovieList from './Components/MovieList';
 import MovieDetails from './Components/Movie';
 import HomePage from './Components/Home';
 import { registerRootComponent } from "expo";
-import MyTabs from './Components/Tab';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-
+import { LinearGradient } from 'expo-linear-gradient';
 const BottomTab=createBottomTabNavigator();
 const Tab = createBottomTabNavigator();
-
+const GradientBackground = () => (
+  <LinearGradient
+    colors={['#FFC200', '#FFD400', '#FFE100']}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 1 }}
+    style={StyleSheet.absoluteFill}
+  />
+);
   const Stack = createStackNavigator();
   function HomeStack() {
     return (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="HomePage" component={HomePage} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Navigator      initialRouteName="HomePage">
+        <Stack.Screen name="HomePage" component={HomePage}options={{ headerShown: false}} />
+        <Stack.Screen name="Profile" component={ProfileScreen}options={{ headerShown: false}} />
        
-        <Stack.Screen name="MovieDetails" component={MovieDetails} />
+        <Stack.Screen name="MovieDetails" component={MovieDetails} options={{ headerShown: false}}/>
       </Stack.Navigator>
     );
   }
@@ -31,8 +37,23 @@ const Tab = createBottomTabNavigator();
   function App() {
     return (
       <NavigationContainer>
-      <BottomTab.Navigator
-        screenOptions={({ route }) => ({
+      <BottomTab.Navigator style={styles.B}
+         tabBarOptions={{       
+         
+          activeTintColor: 'black',
+          inactiveTintColor: 'gray',
+          style: {
+            backgroundColor: 'black',
+            borderTopWidth: 10,
+          },
+          labelStyle: {
+            fontWeight: 'bold',
+            fontSize: 12,
+          },
+        }}
+      
+         
+        screenOptions={({ route }) => ({ tabBarBackground:GradientBackground,
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
@@ -42,12 +63,31 @@ const Tab = createBottomTabNavigator();
               iconName = 'search';
             }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
+            return <Ionicons name={iconName} size={size} color={color}  />;
           },
         })}
       >
-  <BottomTab.Screen name="Home" component={HomeStack} />
-  <BottomTab.Screen name="Search" component={MovieList} />
+  <BottomTab.Screen name="Home" component={HomeStack} options={{
+          title: 'Home',
+          
+          headerStyle: {
+            
+            backgroundColor: 'gold',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+  <BottomTab.Screen name="Search" component={MovieList}  options={{title: 'Search',
+          headerStyle: {
+            backgroundColor: 'gold',
+          },
+          headerTintColor: 'black',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
 </BottomTab.Navigator>
       </NavigationContainer>
     );
@@ -64,6 +104,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  B:{
+backgroundColor:'black'
+  }
 });
 
 // npm start
