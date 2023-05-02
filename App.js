@@ -8,25 +8,48 @@ import LoginPage from './Components/login';
 import MovieList from './Components/MovieList';
 import MovieDetails from './Components/Movie';
 import HomePage from './Components/Home';
-<<<<<<< HEAD
-=======
 import { registerRootComponent } from "expo";
+import MyTabs from './Components/Tab';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
->>>>>>> 30b1bbf4d63ab9201b23be267b25e9bb80bcd7cb
+const BottomTab=createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+
   const Stack = createStackNavigator();
+  function HomeStack() {
+    return (
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+       
+        <Stack.Screen name="MovieDetails" component={MovieDetails} />
+      </Stack.Navigator>
+    );
+  }
+  
   function App() {
-
-    
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomePage} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-          <Stack.Screen name="Movies" component={MovieList} />
-          <Stack.Screen name="MovieDetails" component={MovieDetails} />
-        </Stack.Navigator>
+      <BottomTab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = 'home';
+            } else if (route.name === 'Search') {
+              iconName = 'search';
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+  <BottomTab.Screen name="Home" component={HomeStack} />
+  <BottomTab.Screen name="Search" component={MovieList} />
+</BottomTab.Navigator>
       </NavigationContainer>
-   
     );
   }
  

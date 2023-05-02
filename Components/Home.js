@@ -84,13 +84,15 @@ const styles = StyleSheet.create({
   titleText:{
     color:'#FFFFFF',
     marginTop: 7,
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   poster: {
     width: 300,
     height: 450,
     marginTop:10,
+    marginHorizontal: 55,
+
   },
   title: {
     marginTop: 10,

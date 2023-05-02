@@ -87,14 +87,8 @@ const renderItem = ({ item, }) => {
 
 
   return (
-<<<<<<< HEAD
-    
-    <View style={{ height: '100%', paddingBottom: 5 }}>
-            <TextInput style={styles.input } placeholder="Search movies" onChangeText={handleSearch} />
-=======
     <View style={{ height: '100%'}}>
             <TextInput style={[styles.input, { textAlign: 'center' }]} placeholder="Search movies ..." onChangeText={handleSearch} />
->>>>>>> 30b1bbf4d63ab9201b23be267b25e9bb80bcd7cb
 
       <FlatList style={styles.container}
         ref={flatListRef}

@@ -86,41 +86,6 @@ function MovieDetails({route}) {
           </View> 
           
           <View style={styles.trailer}>
-<<<<<<< HEAD
-  {url && id ? (
-    <WebView
-      source={{ uri: `${url}${id}` }}
-      allowsBackForwardNavigationGestures={false}
-      onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
-      style={{ width: 420, height: 120 }}
-      allowsFullscreenVideo={true}
-      key={url}
-      renderError={() => (
-        <View style={styles.imageContainer}>
-          <Image
-            source={{ uri: 'https://png.pngtree.com/background/20220727/original/pngtree-movie-premiere-event-at-cine-theatre-picture-image_1829764.jpg' }}
-            style={{ width: '100%', height: '100%', position: 'absolute' }}
-          />
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Retry</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    />
-  ) : (
-    <View style={styles.imageContainer}>
-      <Image
-        source={{ uri: 'https://png.pngtree.com/background/20220727/original/pngtree-movie-premiere-event-at-cine-theatre-picture-image_1829764.jpg' }}
-        style={{ width: '100%', height: '100%', position: 'absolute' }}
-      />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText} onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') }>PLAY</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-</View>
-    
-=======
       
           {url&&id&& <WebView  source={{ uri: `${url}${id}`  }}  allowsBackForwardNavigationGestures={false}       onShouldStartLoadWithRequest={handleShouldStartLoadWithRequest}
 
@@ -128,7 +93,6 @@ function MovieDetails({route}) {
           />} 
           </View>  
           
->>>>>>> 30b1bbf4d63ab9201b23be267b25e9bb80bcd7cb
           <View style={styles.reviews}>
           <Button Style={styles.Button} title="Watch Movie Here" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
           </View>
@@ -195,63 +159,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingBottom:20,
   },
-<<<<<<< HEAD
-  reviewsTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  Button: {
-    height: 20,
-    marginHorizontal: 20,
-  },
-  imageContainer: {
-    width: 420,
-    height: 250,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: 'black',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginVertical:52,
-    justifyContent: 'center',
-    alignItems: 'center',
-    
-  },
-  buttonText: {
-    color: 'white',
-  },
- 
- 
-    addReviewButton: {
-        backgroundColor: '#1E90FF',
-        borderRadius: 4,
-        marginTop: 20,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        alignSelf: 'flex-start',
-        },
-        addReviewText: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 16,
-        },
-        comments: {
-        marginTop: 20,
-        },
-        commentText: {
-        fontSize: 16,
-        },
-        });
-=======
   Button:{
     backgroundColor:'green'
   }
 });
->>>>>>> 30b1bbf4d63ab9201b23be267b25e9bb80bcd7cb
         
       export default MovieDetails;
