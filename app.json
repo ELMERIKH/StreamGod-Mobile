@@ -18,7 +18,10 @@
       "ios",
       "android",
       "web"
+<<<<<<< HEAD
      
+=======
+>>>>>>> 30b1bbf4d63ab9201b23be267b25e9bb80bcd7cb
     ],
     "devices": [
       "iPhone 12",
