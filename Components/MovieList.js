@@ -88,6 +88,7 @@ const renderItem = ({ item, }) => {
 
 
   return (
+    
     <View style={{ height: '100%', paddingBottom: 5 }}>
             <TextInput style={styles.input } placeholder="Search movies" onChangeText={handleSearch} />
 

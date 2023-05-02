@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text ,TouchableOpacity,Button,FlatList,StyleSheet,Image} from 'react-native';
 import axios from 'axios';
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper/src';
+
 import { useNavigation } from '@react-navigation/native';
 import ProfileDropdown from './ProfileDropdown';
 
