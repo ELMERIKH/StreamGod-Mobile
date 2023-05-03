@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.71.7",
     "react-native-blockable-webview": "^0.1.0",
+    "react-native-blur": "^3.2.2",
     "react-native-deck-swiper": "^2.0.13",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-linear-gradient": "^2.6.2",

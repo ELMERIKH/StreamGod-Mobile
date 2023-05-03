@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { StyleSheet, Animated, Text, View,TouchableOpacity } from 'react-native';
 
 import ProfileScreen from './Components/ProfileScreen';
 import LoginPage from './Components/login';
@@ -12,16 +12,21 @@ import { registerRootComponent } from "expo";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'react-native-blur';
+
+
 const BottomTab=createBottomTabNavigator();
 const Tab = createBottomTabNavigator();
+
 const GradientBackground = () => (
   <LinearGradient
-    colors={['#FFC200', '#FFD400', '#FFE100']}
+    colors={['#212A3E', '#212A2E', '#212A3E']}
     start={{ x: 0, y: 0 }}
     end={{ x: 1, y: 1 }}
     style={StyleSheet.absoluteFill}
   />
 );
+
   const Stack = createStackNavigator();
   function HomeStack() {
     return (
@@ -39,9 +44,8 @@ const GradientBackground = () => (
       <NavigationContainer>
       <BottomTab.Navigator style={styles.B}
          tabBarOptions={{       
-         
-          activeTintColor: 'black',
-          inactiveTintColor: 'gray',
+          activeTintColor: 'gold',
+          inactiveTintColor: 'white',
           style: {
             backgroundColor: 'black',
             borderTopWidth: 10,
@@ -72,7 +76,7 @@ const GradientBackground = () => (
           
           headerStyle: {
             
-            backgroundColor: 'gold',
+            backgroundColor: '#FFD400',
           },
           headerTintColor: 'black',
           headerTitleStyle: {
