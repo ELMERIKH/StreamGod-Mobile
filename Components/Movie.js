@@ -5,7 +5,6 @@ import { WebView} from 'react-native-webview';
 import Reviews from './Reviews';
 
 
-
 function MovieDetails({route}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -19,6 +18,7 @@ function MovieDetails({route}) {
   const [trailerKey, setTrailerKey] = useState(null);
 
   const [allowRedirect, setAllowRedirect] = useState(false);
+  
 
   const handleShouldStartLoadWithRequest = (event) => {
     // Check if the request is a redirect
