@@ -12,7 +12,7 @@ import { registerRootComponent } from "expo";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'react-native-blur';
+
 
 
 const BottomTab=createBottomTabNavigator();
