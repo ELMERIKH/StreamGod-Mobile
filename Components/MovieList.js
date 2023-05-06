@@ -45,12 +45,16 @@ function MovieList() {
     }
     fetchMovies();
   }, [page]);
-  const handleSearch = (text) => {
-    const filteredResults = Allmovies.filter((movie) => {
-      return movie.title.toLowerCase().includes(text.toLowerCase());
-    });
+  const handleSearch = async (text) => {
     setSearchQuery(text);
-    setFilteredMovies(filteredResults);
+    if (text.length > 0) {
+      const apiKey = '152f41397d36a9af171b938124f0281c';
+      const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${text}`);
+      const results = res.data.results;
+      setFilteredMovies(results);
+    } else {
+      setFilteredMovies([]);
+    }
   };
 
   const handleNextPage = () => {
