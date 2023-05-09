@@ -5,22 +5,12 @@ import Swiper from 'react-native-swiper/src';
 
 import { useNavigation } from '@react-navigation/native';
 import ProfileDropdown from './ProfileDropdown';
-import TVHomePage from './TVHome';
+import HomePage from './Home';
 
 
 
-
-function HomePage() {
+function TVHomePage() {
   const [popularMovies, setPopularMovies] = useState([]);
-  const [categoryIndex, setCategoryIndex] = useState(0); 
-  const [currentMovies, setCurrentMovies] = useState([]);
-  const [categoryPages, setCategoryPages] = useState([]);
-
-// current category index
-const [movies, setMovies] = useState([]);
-const [page, setPage] = useState(1); // current page number
-const moviesPerPage = 20; 
-
   const [categoryIndex, setCategoryIndex] = useState(0); 
   const [currentMovies, setCurrentMovies] = useState([]);
   const [categoryPages, setCategoryPages] = useState([]);
@@ -33,22 +23,16 @@ const moviesPerPage = 20;
   const navigation = useNavigation();
   const [showProfile, setShowProfile] = useState(false); // Add state to toggle profile view
   const categories = [
-    { name: "Popular", endpoint: "https://api.themoviedb.org/3/movie/popular?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Top Rated", endpoint: "https://api.themoviedb.org/3/movie/top_rated?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Trending", endpoint: "https://api.themoviedb.org/3/movie/now_playing?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    // Add more categories as needed
-  ];
-  const categories = [
-    { name: "Popular 🔥", endpoint: "https://api.themoviedb.org/3/movie/now_playing?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Top Rated 🎥", endpoint: "https://api.themoviedb.org/3/movie/top_rated?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Trending 🚀", endpoint: "https://api.themoviedb.org/3/discover/movie?api_key=152f41397d36a9af171b938124f0281c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=3&primary_release_year=2023&with_watch_monetization_types=flatrate"}
+    { name: "Popular 🔥", endpoint: "https://api.themoviedb.org/3/tv/popular?api_key=152f41397d36a9af171b938124f0281c&page=" },
+    { name: "Top Rated 🎥", endpoint: "https://api.themoviedb.org/3/tv/top_rated?api_key=152f41397d36a9af171b938124f0281c&page=" },
+    { name: "Trending 🚀", endpoint: "https://api.themoviedb.org/3/discover/tv?api_key=152f41397d36a9af171b938124f0281c&language=en-US&sort_by=popularity.desc&page=4&timezone=America%2FNew_York&with_genres=action%2Cdrama&include_null_first_air_dates=false&with_watch_monetization_types=flatrate&with_status=0&with_type="}
     
     // Add more categories as needed
   ];
   useEffect(() => {
     async function fetchPopularMovies(page) {
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&page=2`);
       setPopularMovies(res.data.results);
     }
 
@@ -60,14 +44,14 @@ const moviesPerPage = 20;
       const moviesData = [];
       const pagesData = [];
 
-      for (let i = 0; i < categories.length; i++) { 
+      for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
         const endpoint = category.endpoint + (categoryPages[i] || 1);
 
         const res = await axios.get(endpoint);
         const categoryMovies = res.data.results.map((movie) => ({
           id: movie.id,
-          title: movie.title,
+          title: movie.name,
           image: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
           rating: movie.vote_average,
           overview: movie.overview,
@@ -76,6 +60,7 @@ const moviesPerPage = 20;
         }));
         moviesData.push(categoryMovies);
         pagesData.push(res.data.page);
+        
       }
       setMovies(moviesData);
       setCategoryPages(pagesData);
@@ -95,28 +80,32 @@ const moviesPerPage = 20;
     <View style={styles.container}>
       <View style={styles.navbar}> 
     
-      <ProfileDropdown />
      
+    <TouchableOpacity style={styles.button}  onPress={() => navigation.navigate('HomePage')}>
+        <Text style={styles.buttonText}>Movies</Text>
+      </TouchableOpacity>
       </View>
       <ScrollView >
-      <Text style={styles.titleText}>FEATURED MOVIES</Text>
-      <Swiper slidesPerView={3} spaceBetween={20}>
+    
+      <View style={styles.swiperContainer}>
+      <Swiper style={styles.swiper} slidesPerView={1} spaceBetween={20} loop={false}>
         {popularMovies.map((movie) => (
           <View key={movie.id}>
             <View style={styles.movieContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('MovieDetails', { itemId: movie.id })}>
+              <TouchableOpacity onPress={() => navigation.navigate('TVDetails', { itemId: movie.id })}>
                 <Image
                   source={{
                     uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
                   }}
                   style={styles.poster}
                 />
-                <Text style={styles.title}>{movie.title}</Text>
+                <Text style={styles.title}>{movie.name}</Text>
               </TouchableOpacity>
             </View>
           </View>
         ))}
       </Swiper>
+      </View>
       <View style={styles.categoriesContainer}>
       {categories.map((category, index) => (
  <View key={index} style={styles.categoryContainer}>
@@ -127,32 +116,16 @@ const moviesPerPage = 20;
        <TouchableOpacity
          key={movie.id}
          style={styles.movieCard}
-         onPress={() => navigation.navigate('MovieDetails', { itemId: movie.id })}
+         onPress={() => navigation.navigate('TVDetails', { itemId: movie.id })}
        >
          <Image source={{ uri: movie.image }} style={styles.movieImage} />
          <Text style={styles.movieTitle}>{movie.title}</Text>
-         <Text style={styles.movieRating}>Rating: {movie.rating}</Text>
+         <Text style={styles.movieRating}> {movie.rating}⭐</Text>
        </TouchableOpacity>
      ))}
    </ScrollView>
  )}
- <View style={styles.pagination}>
-   <TouchableOpacity
-     disabled={categoryPages[index] === 1}
-     onPress={() => handlePageChange(index, categoryPages[index] - 1)}
-     style={[styles.paginationButton, { marginRight: 10 }]}
-   >
-     <Text>Previous Page</Text>
-   </TouchableOpacity>
-   <Text>{categoryPages[index]}</Text>
-   <TouchableOpacity
-     disabled={movies[index] && categoryPages[index] >= Math.ceil(movies[index].length / moviesPerPage)}
-     onPress={() => handlePageChange(index, categoryPages[index] + 1)}
-     style={[styles.paginationButton, { marginLeft: 10 }]}
-   >
-     <Text>Next Page</Text>
-   </TouchableOpacity>
- </View>
+ 
 </View>
 ))}
 </View>
@@ -201,7 +174,6 @@ const styles = StyleSheet.create({
     marginTop: 7,
     fontSize: 30,
     fontWeight: 'bold',
-  marginRight:200
   },
   poster: {
     width: 360,
@@ -221,7 +193,19 @@ const styles = StyleSheet.create({
   movieContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:50,
+   
     
+  
+    
+  },
+  button: {
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'gold',
   },
  
   profilePopup: {
@@ -241,7 +225,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   categoryContainer: {
-    marginBottom: 20,
+    
+   
   },
   categoryTitle: {
     fontSize: 20,
@@ -267,5 +252,13 @@ const styles = StyleSheet.create({
 
     textAlign: 'center',
   },
+  movieRating: {
+    
+   
+   
+    color:"gold",
+
+    textAlign: 'center',
+  },
 });
-export default HomePage;
+export default TVHomePage;

@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "stretch",
+      "backgroundColor": "black"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -39,9 +39,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ad722713-59cd-43e6-9f08-87a69a0d8427"
+        "projectId": "f639b092-8b68-4237-96a8-5a4c2679af16"
       }
     },
-    "owner": "sohayb112"
+    "owner": "theoneyedking"
   }
 }
