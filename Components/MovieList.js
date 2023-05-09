@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 function MovieList() {
   const [movies, setMovies] = useState([]);
   const [Allmovies, setAllMovies] = useState([]);
+  const [filteredTVShows, setFilteredTVShows] = useState([]);
 
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,11 +50,20 @@ function MovieList() {
     setSearchQuery(text);
     if (text.length > 0) {
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${text}`);
-      const results = res.data.results;
-      setFilteredMovies(results);
+
+      // Search for movies
+      const movieRes = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${text}`);
+      const movieResults = movieRes.data.results;
+
+      // Search for TV shows
+      const tvShowRes = await axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${text}`);
+      const tvShowResults = tvShowRes.data.results;
+
+      setFilteredMovies(movieResults);
+      setFilteredTVShows(tvShowResults);
     } else {
       setFilteredMovies([]);
+      setFilteredTVShows([]);
     }
   };
 
@@ -72,15 +82,20 @@ const handlePrevPage = () => {
 
 const renderItem = ({ item, }) => {  
 
-  
+  const isMovie = item.hasOwnProperty('title'); 
+  const title = isMovie ? item.title : item.name;
+  const releaseDate = isMovie ? item.release_date : item.first_air_date;
+  const itemType = isMovie ? 'Movie' : 'TV-Show';
+
 
   return (
     
 <TouchableOpacity style={{ flexDirection: 'row', marginVertical: 10}} onPress={() => navigation.navigate('MovieDetails', { itemId : item.id })}>
       <Image source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }} style={styles.image} />
       <View  style={{ marginLeft: 10 }}>
-        <Text style={[styles.title, { fontSize: 18, fontWeight: 'bold' }]}>{item.title}</Text>
-        <Text style={[styles.title, { fontSize: 16 }]}>{item.release_date}</Text>
+        <Text style={[styles.title, { fontSize: 18, fontWeight: 'bold' }]}>{title}</Text>
+        <Text style={[styles.title, { fontSize: 16 }]}>{releaseDate}</Text>
+        <Text style={[styles.title,{ fontSize: 16 }]}>{itemType}</Text>
         <Text style={[styles.title,{ fontSize: 16 }]}>{item.vote_average}⭐</Text>
       </View>
     </TouchableOpacity>
@@ -96,7 +111,7 @@ const renderItem = ({ item, }) => {
 
       <FlatList style={styles.container}
         ref={flatListRef}
-        data={filteredMovies.length > 0 ? filteredMovies : movies}
+        data={[...filteredMovies, ...filteredTVShows]}
         contentContainerStyle={{ paddingBottom: 20 }}
 
         renderItem={renderItem}

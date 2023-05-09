@@ -73,7 +73,7 @@ function TVDetails({route}) {
           <View style={styles.header}>
             <Image source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }} style={styles.poster} />
             <View style={styles.headerText}>
-              <Text style={styles.title}>{movie.original_name}</Text>
+              <Text style={styles.title}>{movie.name}</Text>
               <View style={styles.rating}>
                 <Text style={styles.ratingText}>{movie.vote_average}</Text>
               </View>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#212A3E',
+    
   },
   header: {
     flexDirection: 'row',
@@ -161,7 +162,8 @@ const styles = StyleSheet.create({
     paddingBottom:20,
   },
   Button:{
-    backgroundColor:'green'
+    backgroundColor:'green',
+    
   }
 });
         
