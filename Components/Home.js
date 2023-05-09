@@ -9,7 +9,6 @@ import TVHomePage from './TVHome';
 
 
 
-
 function HomePage() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [categoryIndex, setCategoryIndex] = useState(0); 
@@ -21,23 +20,8 @@ const [movies, setMovies] = useState([]);
 const [page, setPage] = useState(1); // current page number
 const moviesPerPage = 20; 
 
-  const [categoryIndex, setCategoryIndex] = useState(0); 
-  const [currentMovies, setCurrentMovies] = useState([]);
-  const [categoryPages, setCategoryPages] = useState([]);
-
-// current category index
-const [movies, setMovies] = useState([]);
-const [page, setPage] = useState(1); // current page number
-const moviesPerPage = 20; 
-
   const navigation = useNavigation();
   const [showProfile, setShowProfile] = useState(false); // Add state to toggle profile view
-  const categories = [
-    { name: "Popular", endpoint: "https://api.themoviedb.org/3/movie/popular?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Top Rated", endpoint: "https://api.themoviedb.org/3/movie/top_rated?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    { name: "Trending", endpoint: "https://api.themoviedb.org/3/movie/now_playing?api_key=152f41397d36a9af171b938124f0281c&page=" },
-    // Add more categories as needed
-  ];
   const categories = [
     { name: "Popular 🔥", endpoint: "https://api.themoviedb.org/3/movie/now_playing?api_key=152f41397d36a9af171b938124f0281c&page=" },
     { name: "Top Rated 🎥", endpoint: "https://api.themoviedb.org/3/movie/top_rated?api_key=152f41397d36a9af171b938124f0281c&page=" },
@@ -60,7 +44,7 @@ const moviesPerPage = 20;
       const moviesData = [];
       const pagesData = [];
 
-      for (let i = 0; i < categories.length; i++) { 
+      for (let i = 0; i < categories.length; i++) {
         const category = categories[i];
         const endpoint = category.endpoint + (categoryPages[i] || 1);
 
@@ -94,13 +78,16 @@ const moviesPerPage = 20;
   return (
     <View style={styles.container}>
       <View style={styles.navbar}> 
-    
-      <ProfileDropdown />
+      <TouchableOpacity style={styles.button}  onPress={() => navigation.navigate('TVHome')}>
+        <Text style={styles.buttonText}>TV-Shows</Text>
+      </TouchableOpacity>
+     
      
       </View>
       <ScrollView >
-      <Text style={styles.titleText}>FEATURED MOVIES</Text>
-      <Swiper slidesPerView={3} spaceBetween={20}>
+    
+      <View style={styles.swiperContainer}>
+      <Swiper style={styles.swiper} slidesPerView={1} spaceBetween={20} loop={false}>
         {popularMovies.map((movie) => (
           <View key={movie.id}>
             <View style={styles.movieContainer}>
@@ -117,6 +104,7 @@ const moviesPerPage = 20;
           </View>
         ))}
       </Swiper>
+      </View>
       <View style={styles.categoriesContainer}>
       {categories.map((category, index) => (
  <View key={index} style={styles.categoryContainer}>
@@ -131,28 +119,12 @@ const moviesPerPage = 20;
        >
          <Image source={{ uri: movie.image }} style={styles.movieImage} />
          <Text style={styles.movieTitle}>{movie.title}</Text>
-         <Text style={styles.movieRating}>Rating: {movie.rating}</Text>
+         <Text style={styles.movieRating}> {movie.rating}⭐</Text>
        </TouchableOpacity>
      ))}
    </ScrollView>
  )}
- <View style={styles.pagination}>
-   <TouchableOpacity
-     disabled={categoryPages[index] === 1}
-     onPress={() => handlePageChange(index, categoryPages[index] - 1)}
-     style={[styles.paginationButton, { marginRight: 10 }]}
-   >
-     <Text>Previous Page</Text>
-   </TouchableOpacity>
-   <Text>{categoryPages[index]}</Text>
-   <TouchableOpacity
-     disabled={movies[index] && categoryPages[index] >= Math.ceil(movies[index].length / moviesPerPage)}
-     onPress={() => handlePageChange(index, categoryPages[index] + 1)}
-     style={[styles.paginationButton, { marginLeft: 10 }]}
-   >
-     <Text>Next Page</Text>
-   </TouchableOpacity>
- </View>
+ 
 </View>
 ))}
 </View>
@@ -221,7 +193,19 @@ const styles = StyleSheet.create({
   movieContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:50,
+   
     
+  
+    
+  },
+  button: {
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'gold',
   },
  
   profilePopup: {
@@ -241,7 +225,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   categoryContainer: {
-    marginBottom: 20,
+    
+   
   },
   categoryTitle: {
     fontSize: 20,
@@ -264,6 +249,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     color:"white",
+
+    textAlign: 'center',
+  },
+  movieRating: {
+    
+   
+   
+    color:"gold",
 
     textAlign: 'center',
   },
