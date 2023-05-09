@@ -5,7 +5,7 @@ import { WebView} from 'react-native-webview';
 import Reviews from './Reviews';
 
 
-function MovieDetails({route}) {
+function TVDetails({route}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [id, setId] = useState({});
@@ -33,7 +33,7 @@ function MovieDetails({route}) {
   useEffect(() => {
     async function fetchTrailer() {
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/${itemId}/videos?api_key=${apiKey}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/tv/${itemId}/videos?api_key=${apiKey}`);
       const trailer = res.data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
       
       if (trailer) {
@@ -47,10 +47,11 @@ function MovieDetails({route}) {
     async function fetchMovieDetails() {
  
       const apiKey = '152f41397d36a9af171b938124f0281c';
-      const res = await axios.get(`https://api.themoviedb.org/3/movie/${itemId}?api_key=${apiKey}`);
+      const res = await axios.get(`https://api.themoviedb.org/3/tv/${itemId}?api_key=${apiKey}`);
+      const resu = await axios.get(`https://api.themoviedb.org/3/tv/${itemId}/external_ids?api_key=152f41397d36a9af171b938124f0281c`);
       setIsLoading(false);
       setMovie(res.data);
-      setId(res.data.imdb_id)
+      setId(resu.data.imdb_id)
       
     }
     fetchMovieDetails();
@@ -72,7 +73,7 @@ function MovieDetails({route}) {
           <View style={styles.header}>
             <Image source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }} style={styles.poster} />
             <View style={styles.headerText}>
-              <Text style={styles.title}>{movie.title}</Text>
+              <Text style={styles.title}>{movie.original_name}</Text>
               <View style={styles.rating}>
                 <Text style={styles.ratingText}>{movie.vote_average}</Text>
               </View>
@@ -94,7 +95,7 @@ function MovieDetails({route}) {
           </View>  
           
           <View style={styles.reviews}>
-          <Button Style={styles.Button} title="Watch Movie Here" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
+          <Button Style={styles.Button} title="Watch Movie Here 🎬" onPress={() => handleUrlChange('https://v2.vidsrc.me/embed/') } />
           </View>
         </>
       )}
@@ -164,4 +165,4 @@ const styles = StyleSheet.create({
   }
 });
         
-      export default MovieDetails;
+      export default TVDetails;

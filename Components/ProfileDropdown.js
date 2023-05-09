@@ -10,7 +10,7 @@ function ProfileDropdown() {
   };
 
   const handleLogout = () => {
-    // implement logout logic here
+   
   };
 
   return (

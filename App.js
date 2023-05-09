@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Animated, Text, View,TouchableOpacity } from 'react-native';
 
 import ProfileScreen from './Components/ProfileScreen';
-import LoginPage from './Components/login';
+
 import MovieList from './Components/MovieList';
 import MovieDetails from './Components/Movie';
 import HomePage from './Components/Home';
@@ -12,7 +12,8 @@ import { registerRootComponent } from "expo";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import TVHomePage from './Components/TVHome';
+import TVDetails from './Components/TV';
 
 
 const BottomTab=createBottomTabNavigator();
@@ -32,8 +33,9 @@ const GradientBackground = () => (
     return (
       <Stack.Navigator      initialRouteName="HomePage">
         <Stack.Screen name="HomePage" component={HomePage}options={{ headerShown: false}} />
-        <Stack.Screen name="Profile" component={ProfileScreen}options={{ headerShown: false}} />
-       
+        <Stack.Screen name="TVHome" component={TVHomePage}options={{ headerShown: false}} />
+        <Stack.Screen name="TVDetails" component={TVDetails} options={{ headerShown: false}}/>
+
         <Stack.Screen name="MovieDetails" component={MovieDetails} options={{ headerShown: false}}/>
       </Stack.Navigator>
     );
