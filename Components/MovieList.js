@@ -68,8 +68,6 @@ const handlePrevPage = () => {
 
 const renderItem = ({ item, }) => {  
 
-  
-
   return (
     
 <TouchableOpacity style={{ flexDirection: 'row', marginVertical: 10}} onPress={() => navigation.navigate('MovieDetails', { itemId : item.id })}>

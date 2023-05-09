@@ -56,7 +56,7 @@ const GradientBackground = () => (
           },
         }}
       
-         
+     
         screenOptions={({ route }) => ({ tabBarBackground:GradientBackground,
           tabBarIcon: ({ color, size }) => {
             let iconName;
