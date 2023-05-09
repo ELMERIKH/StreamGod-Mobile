@@ -82,12 +82,6 @@ const handlePrevPage = () => {
 
 const renderItem = ({ item, }) => {  
 
-  const isMovie = item.hasOwnProperty('title'); 
-  const title = isMovie ? item.title : item.name;
-  const releaseDate = isMovie ? item.release_date : item.first_air_date;
-  const itemType = isMovie ? 'Movie' : 'TV-Show';
-
-
   return (
     
 <TouchableOpacity style={{ flexDirection: 'row', marginVertical: 10}} onPress={() => navigation.navigate('MovieDetails', { itemId : item.id })}>
