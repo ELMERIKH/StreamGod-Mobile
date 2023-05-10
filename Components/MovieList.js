@@ -81,6 +81,12 @@ const handlePrevPage = () => {
 
 
 const renderItem = ({ item, }) => {  
+  const isMovie = item.hasOwnProperty('title'); // Check if it's a movie or TV show
+    const title = isMovie ? item.title : item.name;
+    const releaseDate = isMovie ? item.release_date : item.first_air_date;
+    const itemType = isMovie ? 'Movie' : 'TV Show';
+
+
 
   return (
     
